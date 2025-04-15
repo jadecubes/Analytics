@@ -41,3 +41,23 @@ const { processAnalyticsEvent } = useAnalytics()
      [AnalyticsPlatforms.META, AnalyticsPlatforms.GA, AnalyticsPlatforms.TIKTOK]
 )
 ```
+
+## What If I Need to Group Similar Events
+Using utility functions is a good idea.
+```
+export type RegisterSalesEventsArgs = {
+  platforms?: AnalyticsPlatforms[],
+  conversionMap?: ConversionMap,
+}
+export const registerSalesEvents = (args?: RegisterSalesEventsArgs) => {
+  sendViewItemEvent(args)
+  sendPurchaseEvent(args)
+  bindSendAddToCartEvent(args)
+  bindSendAddToWishlistEvent(args)
+  bindSendBeginCheckoutEvent(args)
+  sendViewMyAccountEvent(args)
+  sendViewItemListEvent(args)
+}
+```
+
+
