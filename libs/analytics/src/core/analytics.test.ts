@@ -1,5 +1,5 @@
 import { TIME_WAIT_FOR_READY_PLATFORM } from './analytics'
-import { type BaseAnalyticsEvent } from './events'
+import { type BaseAnalyticsEvent } from '../types/events'
 import { Ga } from './ga'
 import { Meta } from './meta'
 import { TikTok } from './tiktok'

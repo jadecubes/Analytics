@@ -1,11 +1,11 @@
 import { createContext, useMemo, useRef, type ReactNode } from 'react'
-import { type BaseAnalyticsEvent } from './events'
-import { useEffectOnce } from './useEffectOnce'
-import { AnalyticsPlatforms, type Analytics } from './analytics'
-import { Ga } from './ga'
-import { Meta } from './meta'
-import { TikTok } from './tiktok'
-import { useCallbackEvent } from './useCallbackEvent'
+import { type BaseAnalyticsEvent } from '../types/events'
+import { useEffectOnce } from '../hooks/useEffectOnce'
+import { AnalyticsPlatforms, type Analytics } from '../core/analytics'
+import { Ga } from '../core/ga'
+import { Meta } from '../core/meta'
+import { TikTok } from '../core/tiktok'
+import { useCallbackEvent } from '../hooks/useCallbackEvent'
 
 export const providerInstanceMapping: Record<
 AnalyticsPlatforms,

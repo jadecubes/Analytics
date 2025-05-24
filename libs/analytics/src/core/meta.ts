@@ -1,4 +1,4 @@
-import { type BaseAnalyticsEvent } from './events'
+import { type BaseAnalyticsEvent } from '../types/events.ts'
 import { Analytics } from './analytics.ts'
 
 export class Meta extends Analytics<BaseAnalyticsEvent> {

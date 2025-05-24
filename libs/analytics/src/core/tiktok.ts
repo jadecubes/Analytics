@@ -1,6 +1,6 @@
 import { Analytics } from './analytics.ts'
-import { type BaseAnalyticsEvent } from './events'
-import './window.d.ts'
+import { type BaseAnalyticsEvent } from '../types/events.ts'
+import './analytics.ts'
 
 export class TikTok extends Analytics<BaseAnalyticsEvent> {
   protected measurementId: string
@@ -63,10 +63,9 @@ export class TikTok extends Analytics<BaseAnalyticsEvent> {
 
   public sendAnalyticsEvent (customEvent: BaseAnalyticsEvent): number {
     const { eventName, eventParams } = customEvent
-    const ttqEvent = { event: eventName, eventParams }
     if (window.ttq) {
       try {
-        window.ttq.track?.(ttqEvent.event, ttqEvent.eventParams)
+        window.ttq.track?.(eventName, eventParams)
         return 0
       } catch (error) {
         console.error('[TT] sendEvent', error)

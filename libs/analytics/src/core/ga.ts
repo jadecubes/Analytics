@@ -1,6 +1,6 @@
 import { Analytics } from './analytics.ts'
-import { type BaseAnalyticsEvent } from './events'
-import './window.d.ts'
+import { type BaseAnalyticsEvent } from '../types/events.ts'
+import './analytics.ts'
 
 export class Ga extends Analytics<BaseAnalyticsEvent> {
   protected measurementId: string

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { AnalyticsContext, type AnalyticsContextProps } from './AnalyticsProvider'
+import { AnalyticsContext, type AnalyticsContextProps } from '../react/AnalyticsProvider'
 
 export const useAnalytics = (): AnalyticsContextProps => {
   const context = useContext(AnalyticsContext)

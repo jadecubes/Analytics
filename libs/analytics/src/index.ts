@@ -1,3 +1,3 @@
-export * from './AnalyticsProvider'
-export * from './useAnalytics'
-export * from './analytics'
+export * from './react/AnalyticsProvider'
+export * from './hooks/useAnalytics'
+export * from './core/analytics'

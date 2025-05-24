@@ -1,4 +1,4 @@
-import { type BaseAnalyticsEvent } from './events'
+import { type BaseAnalyticsEvent } from '../types/events'
 export const TIME_WAIT_FOR_READY_PLATFORM = 500
 export enum AnalyticsPlatforms {
   GA = 'GA',

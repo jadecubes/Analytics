@@ -4,7 +4,7 @@ interface Window {
   gtag: ((...args: unknown[]) => void) | undefined,
   fbq: ((...args: unknwon[]) => void) | undefined,
   ttq: {
-    track: ((event: string, payload?: Record<string, unknown>) => void) | undefined,
+    track: ((event: string, payload?: unknown) => void) | undefined,
     push: ((args: unknown[]) => void) | undefined,
     page: (() => void) | undefined,
     load: ((measurementId: string) => void) | undefined,
