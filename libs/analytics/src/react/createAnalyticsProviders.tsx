@@ -1,4 +1,4 @@
-import { AnalyticsPlatforms } from '../core/_Analytics'
+import { AnalyticsPlatforms } from '../core/Analytics'
 import { Ga, GA4Config } from '../core/Ga'
 import { Meta, MetaPixelConfig } from '../core/Meta'
 import { TikTokPixelConfig, TikTok } from '../core/Tiktok'
