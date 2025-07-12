@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 declare let gtag: Gtag.Gtag
 
 declare namespace Gtag {
@@ -10,14 +9,13 @@ declare namespace Gtag {
     event: [eventName: EventNames | (string & {}), eventParams?: ControlParams | EventParams | CustomParams]
     get: [
       targetId: string,
-      fieldName: FieldNames | string,
+      fieldName: FieldNames,
       callback?: (field?: string | CustomParams) => unknown,
     ]
     consent: [consentArg: ConsentArg | (string & {}), consentParams: ConsentParams]
   }
 
   type Gtag = <Command extends keyof GtagCommands>(command: Command, ...args: GtagCommands[Command]) => void
-
   interface ConfigParams {
     page_title?: string
     page_location?: string

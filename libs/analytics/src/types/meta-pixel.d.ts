@@ -47,7 +47,6 @@ declare namespace MetaPixel {
       InitialAppId: string,
       eventName: string,
       parameters:
-        | MetaPixel.ViewContentParameters
         | ViewContentParameters
         | SearchParameters
         | AddToCartParameters

@@ -33,7 +33,7 @@ describe('Ga Analytics', () => {
     expect(window.dataLayer).toBeDefined()
   })
 
-  it('should queue and send events when gtag is ready after delay', async () => {
+  it('should queue and send events when gtag is ready after delay', () => {
     const ga = Ga.getInstance(config)
     const mockGtag = jest.fn()
     window.gtag = mockGtag
