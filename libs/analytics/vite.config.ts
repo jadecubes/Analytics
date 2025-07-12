@@ -30,6 +30,7 @@ export default defineConfig({
   build: {
     outDir: '../../dist/libs/analytics',
     emptyOutDir: true,
+    minify: 'esbuild',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,

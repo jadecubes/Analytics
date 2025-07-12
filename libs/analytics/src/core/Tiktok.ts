@@ -1,6 +1,5 @@
 import { type BaseAnalyticsEvent } from '../types/events.ts'
-import { Analytics } from './Analytics.ts'
-import './Analytics.ts'
+import { Analytics } from './_Analytics.ts'
 
 export interface TikTokPixelConfig {
   measurementId: string

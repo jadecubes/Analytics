@@ -1,3 +1,2 @@
-export * from './react/AnalyticsProvider'
-export * from './hooks/useAnalytics'
-export * from './core/Analytics'
+export * from './react/createAnalyticsProviders'
+export { AnalyticsPlatforms } from './core/_Analytics'
