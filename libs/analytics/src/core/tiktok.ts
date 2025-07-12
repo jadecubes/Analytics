@@ -1,25 +1,28 @@
-import { Analytics } from './analytics.ts'
 import { type BaseAnalyticsEvent } from '../types/events.ts'
-import './analytics.ts'
+import { Analytics } from './Analytics.ts'
+import './Analytics.ts'
 
+export interface TikTokPixelConfig {
+  measurementId: string
+}
 export class TikTok extends Analytics<BaseAnalyticsEvent> {
   protected measurementId: string
   private static instance: TikTok | null = null
-  constructor (config: Record<string, string>) {
+  constructor(config: TikTokPixelConfig) {
     super()
     this.measurementId = config.measurementId
     this.initialize()
   }
 
   // Static getInstance method for singleton pattern
-  public static getInstance (config: Record<string, string>): TikTok {
+  public static getInstance(config: TikTokPixelConfig): TikTok {
     if (!TikTok.instance) {
       TikTok.instance = new TikTok(config)
     }
     return TikTok.instance
   }
 
-  public initialize (): void {
+  protected initialize(): void {
     this.setIsReady(false)
     const head = document.querySelector('head')
     const existingScript = document.querySelector(`script[data-id="tiktok-pixel-${this.measurementId}"]`)
@@ -56,22 +59,27 @@ export class TikTok extends Analytics<BaseAnalyticsEvent> {
         ttq.page();
       }(window, document, 'ttq');
       `
-      script.onload = () => { this.setIsReady(true) }
+      script.onload = () => {
+        this.setIsReady(true)
+      }
       head?.appendChild(script)
-    } else { this.setIsReady(true) }
+    }
+    else { this.setIsReady(true) }
   }
 
-  public sendAnalyticsEvent (customEvent: BaseAnalyticsEvent): number {
+  protected sendAnalyticsEvent(customEvent: BaseAnalyticsEvent): number {
     const { eventName, eventParams } = customEvent
     if (window.ttq) {
       try {
         window.ttq.track?.(eventName, eventParams)
         return 0
-      } catch (error) {
+      }
+      catch (error) {
         console.error('[TT] sendEvent', error)
         return -1
       }
-    } else {
+    }
+    else {
       console.error('[TT] ttq is not defined')
       return -1
     }
