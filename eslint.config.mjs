@@ -21,19 +21,19 @@ export default defineConfig([
       '**/coverage/**',
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
+      '**/storybook-static/**',
     ],
   },
-
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.mjs'],
     plugins: {
       '@nx': nxEslintPlugin,
       '@stylistic': stylistic,
-      'react-hooks': pluginReactHooks,
-      'jsx-a11y': jsxA11y,
-      'react': pluginReact,
       '@typescript-eslint': pluginTypeScript,
       'import': importPlugin,
+      'jsx-a11y': jsxA11y,
+      'react': pluginReact,
+      'react-hooks': pluginReactHooks,
       '@stylexjs': stylexPlugin,
     },
     languageOptions: {
@@ -42,6 +42,8 @@ export default defineConfig([
         ecmaVersion: 'latest',
         sourceType: 'module',
         ecmaFeatures: { jsx: true },
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.browser,
@@ -50,13 +52,11 @@ export default defineConfig([
       },
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
+      react: { version: 'detect' },
     },
     rules: {
-      ...pluginTypeScript.configs.strict.rules,
-      ...pluginTypeScript.configs.stylistic.rules,
+      ...pluginTypeScript.configs.recommended.rules,
+      ...pluginTypeScript.configs['recommended-requiring-type-checking'].rules,
       ...pluginReact.configs.recommended.rules,
       ...pluginReact.configs['jsx-runtime'].rules,
       ...pluginReactHooks.configs.recommended.rules,
@@ -86,8 +86,15 @@ export default defineConfig([
           ignoreRestSiblings: true,
         },
       ],
+      '@typescript-eslint/no-unused-expressions': [
+        'error',
+        {
+          allowShortCircuit: true,
+          allowTernary: true,
+          allowTaggedTemplates: true,
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'warn',
-
       'import/order': [
         'error',
         {
@@ -112,20 +119,15 @@ export default defineConfig([
           },
         },
       ],
-
       '@stylexjs/valid-styles': 'error',
-
       'react/prop-types': 'off',
       'eqeqeq': ['error', 'smart'],
     },
   },
-
   {
     files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.spec.js', '**/*.spec.jsx'],
     languageOptions: {
-      globals: {
-        ...globals.jest,
-      },
+      globals: { ...globals.jest },
     },
   },
 ])

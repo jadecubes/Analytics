@@ -1,6 +1,6 @@
+import { resolve } from 'path'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
-import { resolve } from 'path'
 import { defineConfig, loadEnv } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
@@ -14,13 +14,13 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       host: 'localhost',
       fs: {
-        cachedChecks: false
-      }
+        cachedChecks: false,
+      },
     },
 
     preview: {
       port: 4300,
-      host: 'localhost'
+      host: 'localhost',
     },
 
     /**
@@ -29,8 +29,8 @@ export default defineConfig(({ mode }) => {
      */
     resolve: {
       alias: {
-        '~': resolve(__dirname, 'src')
-      }
+        '~': resolve(__dirname, 'src'),
+      },
     },
     plugins: [react(), nxViteTsPaths(), svgr()],
 
@@ -45,8 +45,8 @@ export default defineConfig(({ mode }) => {
       outDir: '../../dist/apps/analyticsApp',
       reportCompressedSize: true,
       commonjsOptions: {
-        transformMixedEsModules: true
-      }
-    }
+        transformMixedEsModules: true,
+      },
+    },
   }
 })
