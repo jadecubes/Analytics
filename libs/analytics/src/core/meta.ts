@@ -1,31 +1,34 @@
 import { type BaseAnalyticsEvent } from '../types/events.ts'
-import { Analytics } from './analytics.ts'
+import { Analytics } from './Analytics.ts'
+
+export interface MetaPixelConfig {
+  measurementId: string
+  userId?: string | null
+}
 
 export class Meta extends Analytics<BaseAnalyticsEvent> {
   protected measurementId: string
   private static instance: Meta | null = null
 
-  constructor (config: Record<string, string>) {
+  constructor(config: MetaPixelConfig) {
     super()
     this.measurementId = config.measurementId
     this.initialize()
   }
 
   // Static getInstance method for singleton pattern
-  public static getInstance (config: Record<string, string>): Meta {
+  public static getInstance(config: MetaPixelConfig): Meta {
     if (!Meta.instance) {
       Meta.instance = new Meta(config)
     }
     return Meta.instance
   }
 
-  public initialize (): void {
+  protected initialize(): void {
     this.setIsReady(false)
     const head = document.querySelector('head')
     const existingScript = document.querySelector('script[src*="connect.facebook.net/en_US/fbevents.js"]')
     // https://www.facebook.com/help/1604282442927573
-    // Converted textContent is in sc-44553
-    // Confirm only init once
     if (!existingScript) {
       const script = document.createElement('script')
       script.textContent = `
@@ -40,23 +43,28 @@ export class Meta extends Analytics<BaseAnalyticsEvent> {
       fbq('init', '${this.measurementId}');
       fbq('track', 'PageView');
       `
-      script.onload = () => { this.setIsReady(true) }
+      script.onload = () => {
+        this.setIsReady(true)
+      }
       head?.appendChild(script)
-    } else { this.setIsReady(true) }
+    }
+    else { this.setIsReady(true) }
   }
 
-  public sendAnalyticsEvent (customEvent: BaseAnalyticsEvent): number {
+  protected sendAnalyticsEvent(customEvent: BaseAnalyticsEvent): number {
     const { eventName, eventParams } = customEvent
     const fbqEvent = ['event', eventName, eventParams]
     if (window.fbq) {
       try {
         window.fbq(...fbqEvent)
         return 0
-      } catch (error) {
+      }
+      catch (error) {
         console.error('[META] sendEvent', error)
         return -1
       }
-    } else {
+    }
+    else {
       console.error('[META] fbq is not defined')
       return -1
     }
