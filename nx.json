@@ -7,7 +7,7 @@
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/eslint.config.mjs",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
       "!{projectRoot}/test-setup.[jt]s",
@@ -31,7 +31,8 @@
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
-        "targetName": "lint"
+        "targetName": "lint",
+        "eslintConfig": "eslint.config.mjs"
       }
     },
     {
@@ -104,6 +105,9 @@
     },
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
+    },
+    "lint": {
+      "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
     }
   }
 }
