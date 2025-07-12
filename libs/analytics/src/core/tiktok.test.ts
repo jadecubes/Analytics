@@ -1,5 +1,5 @@
 import { type BaseAnalyticsEvent } from '../types/events'
-import { TikTok } from './_Tiktok'
+import { TikTok } from './Tiktok'
 
 describe('TikTok Analytics', () => {
   const measurementId = 'TT-TEST-ID'
