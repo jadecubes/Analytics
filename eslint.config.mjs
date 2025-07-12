@@ -1,11 +1,9 @@
 import nxEslintPlugin from '@nx/eslint-plugin'
 import stylexPlugin from '@stylexjs/eslint-plugin'
 import stylistic from '@stylistic/eslint-plugin'
-import stylisticTs from '@stylistic/eslint-plugin-ts'
 import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 import parserTypeScript from '@typescript-eslint/parser'
 import { defineConfig } from 'eslint-define-config'
-import disableAutofix from 'eslint-plugin-disable-autofix'
 import importPlugin from 'eslint-plugin-import'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import pluginReact from 'eslint-plugin-react'
@@ -23,7 +21,6 @@ export default defineConfig([
       '**/coverage/**',
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
-      '**/storybook-static/**',
     ],
   },
 
@@ -32,14 +29,12 @@ export default defineConfig([
     plugins: {
       '@nx': nxEslintPlugin,
       '@stylistic': stylistic,
-      '@stylistic/ts': stylisticTs,
       'react-hooks': pluginReactHooks,
       'jsx-a11y': jsxA11y,
       'react': pluginReact,
       '@typescript-eslint': pluginTypeScript,
       'import': importPlugin,
       '@stylexjs': stylexPlugin,
-      'disable-autofix': disableAutofix,
     },
     languageOptions: {
       parser: parserTypeScript,
@@ -78,7 +73,7 @@ export default defineConfig([
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/indent': ['error', 2],
       '@stylistic/keyword-spacing': 'error',
-      '@stylistic/ts/type-annotation-spacing': 'error',
+      '@stylistic/type-annotation-spacing': 'error',
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -119,7 +114,6 @@ export default defineConfig([
       ],
 
       '@stylexjs/valid-styles': 'error',
-      'disable-autofix/@stylexjs/no-unused': ['warn'],
 
       'react/prop-types': 'off',
       'eqeqeq': ['error', 'smart'],

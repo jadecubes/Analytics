@@ -1,31 +1,31 @@
 import { createContext, useMemo, useRef, type ReactNode } from 'react'
-import { type BaseAnalyticsEvent } from '../types/events'
-import { useEffectOnce } from '../hooks/useEffectOnce'
 import { AnalyticsPlatforms, type Analytics } from '../core/analytics'
 import { Ga } from '../core/ga'
 import { Meta } from '../core/meta'
 import { TikTok } from '../core/tiktok'
 import { useCallbackEvent } from '../hooks/useCallbackEvent'
+import { useEffectOnce } from '../hooks/useEffectOnce'
+import { type BaseAnalyticsEvent } from '../types/events'
 
 export const providerInstanceMapping: Record<
-AnalyticsPlatforms,
-(config: Record<string, string>) => Analytics<BaseAnalyticsEvent>
+  AnalyticsPlatforms,
+  (config: Record<string, string>) => Analytics<BaseAnalyticsEvent>
 > = {
-  [AnalyticsPlatforms.GA]: (config) => Ga.getInstance(config),
-  [AnalyticsPlatforms.META]: (config) => Meta.getInstance(config),
-  [AnalyticsPlatforms.TIKTOK]: (config) => TikTok.getInstance(config)
+  [AnalyticsPlatforms.GA]: config => Ga.getInstance(config),
+  [AnalyticsPlatforms.META]: config => Meta.getInstance(config),
+  [AnalyticsPlatforms.TIKTOK]: config => TikTok.getInstance(config),
 }
 
 export interface AnalyticsContextProps {
-  processAnalyticsEvent: (customEvent: BaseAnalyticsEvent, platforms?: AnalyticsPlatforms[]) => void,
+  processAnalyticsEvent: (customEvent: BaseAnalyticsEvent, platforms?: AnalyticsPlatforms[]) => void
 }
 export const AnalyticsContext = createContext<AnalyticsContextProps | undefined>(undefined)
 
 export type AnalyticsConfig = Partial<Record<AnalyticsPlatforms, Record<string, string>>>
 
 interface AnalyticsProviderProps {
-  children: ReactNode,
-  config: AnalyticsConfig,
+  children: ReactNode
+  config: AnalyticsConfig
 }
 
 export const AnalyticsProvider = ({ children, config }: AnalyticsProviderProps) => {
@@ -52,7 +52,8 @@ export const AnalyticsProvider = ({ children, config }: AnalyticsProviderProps) 
         const provider = analyticsProviders.current[platform]
         provider?.processAnalyticsEvent(event)
       })
-    } else {
+    }
+    else {
       for (const platform in analyticsProviders.current) {
         const provider = analyticsProviders.current[platform as AnalyticsPlatforms]
         provider?.processAnalyticsEvent(event)
@@ -62,9 +63,9 @@ export const AnalyticsProvider = ({ children, config }: AnalyticsProviderProps) 
 
   const value = useMemo(
     () => ({
-      processAnalyticsEvent
+      processAnalyticsEvent,
     }),
-    [processAnalyticsEvent]
+    [processAnalyticsEvent],
   )
 
   return (

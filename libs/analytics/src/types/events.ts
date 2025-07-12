@@ -7,12 +7,10 @@
  * https://developers.google.com/analytics/devguides/collection/ga4/reference/events?client_type=gtm#add_to_cart
  */
 export interface BaseAnalyticsEvent {
-  eventName: string,
-  eventParams: Gtag.EventParams | Gtag.ControlParams | Gtag.CustomParams,
+  eventName: string
+  eventParams: Gtag.EventParams | Gtag.ControlParams | Gtag.CustomParams
   /**
    * The unique ID of the event. This is used to deduplicate events in the event processing pipeline.
    */
-  eventId?: string,
+  eventId?: string
 }
-
-
