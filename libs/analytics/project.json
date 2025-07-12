@@ -4,6 +4,12 @@
   "sourceRoot": "libs/analytics/src",
   "projectType": "library",
   "tags": [],
-  "// targets": "to see all targets run: nx show project analytics --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "options": {
+        "outputPath": "dist/libs/analytics"
+      }
+    }
+  }
 }
