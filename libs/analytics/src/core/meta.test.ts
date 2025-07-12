@@ -1,5 +1,5 @@
 import { type BaseAnalyticsEvent } from '../types/events'
-import { Meta } from './_Meta'
+import { Meta } from './Meta'
 
 describe('Meta Analytics', () => {
   const measurementId = 'META-TEST-ID'
