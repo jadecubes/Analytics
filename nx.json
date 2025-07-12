@@ -1,5 +1,11 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "release": {
+    "version": {
+      "conventionalCommits": true
+    },
+    "projects": ["apps/*"]
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
@@ -31,8 +37,7 @@
     {
       "plugin": "@nx/eslint/plugin",
       "options": {
-        "targetName": "lint",
-        "eslintConfig": "eslint.config.mjs"
+        "targetName": "lint"
       }
     },
     {
@@ -81,7 +86,8 @@
         "style": "css",
         "linter": "eslint",
         "unitTestRunner": "jest"
-      }
+      },
+      "setParserOptionsProject": true
     },
     "@nx/next": {
       "application": {
@@ -103,11 +109,31 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
+    "w-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "commands": [
+          {
+            "command": "NODE_ENV=production vite build",
+            "forwardAllArgs": false
+          }
+        ]
+      }
+    },
+    "i18n": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/scripts/i18n/googleSheetToJson.js {args.app}"
+      }
+    },
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
     },
-    "lint": {
-      "inputs": ["default", "{workspaceRoot}/eslint.config.mjs"]
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   }
 }
