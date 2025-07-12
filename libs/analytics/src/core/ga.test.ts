@@ -1,5 +1,5 @@
 import { type BaseAnalyticsEvent } from '../types/events'
-import { Ga } from './Ga'
+import { Ga } from './_Ga'
 
 describe('Ga Analytics', () => {
   const measurementId = 'GA-TEST-ID'
