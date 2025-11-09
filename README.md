@@ -1,7 +1,9 @@
 # Analytics 🧮
 
 [![npm version](https://img.shields.io/npm/v/@jadecubes/analytics.svg)](https://www.npmjs.com/package/@jadecubes/analytics)  
-[![Build Status](https://img.shields.io/github/actions/workflow/status/jadecubes/Analytics/ci.yml)](https://github.com/jadecubes/Analytics/actions)  
+
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jadecubes/Analytics/ci.yml)](https://github.com/jadecubes/Analytics/actions) 
+
 [![License](https://img.shields.io/npm/l/@jadecubes/analytics.svg)](LICENSE)
 
 > A unified TypeScript library for tracking analytics across **Google Analytics 4**, **Meta (Facebook) Pixel**, and **TikTok Pixel**, built for React applications and beyond.
