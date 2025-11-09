@@ -5,7 +5,8 @@
 <p align="center">
 
 [![npm version](https://img.shields.io/npm/v/@jadecubes/analytics.svg)](https://www.npmjs.com/package/@jadecubes/analytics)
-[![npm downloads](https://img.shields.io/npm/dm/@jadecubes/analytics.svg)](https://www.npmjs.com/package/@jadecubes/analytics)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/@jadecubes/analytics)](https://bundlephobia.com/package/@jadecubes/analytics)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jadecubes/Analytics/ci.yml?branch=main)](https://github.com/jadecubes/Analytics/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.3-blue)](https://reactjs.org/)
@@ -43,15 +44,138 @@ Modern front-ends often require multiple analytics platforms. Analytics offers:
 
 ## 🚀 Getting Started
 
-### Install
+### Installation
 
 ```bash
-# npm
 npm install @jadecubes/analytics
-
-# or with pnpm / yarn
+# or
 pnpm add @jadecubes/analytics
+# or
 yarn add @jadecubes/analytics
+```
+
+### Basic Usage
+
+```typescript
+import { createAnalyticsProviders, AnalyticsPlatforms } from '@jadecubes/analytics'
+
+// Initialize analytics providers at app startup
+createAnalyticsProviders({
+  [AnalyticsPlatforms.GA]: {
+    measurementId: 'G-XXXXXXXXXX'
+  },
+  [AnalyticsPlatforms.META]: {
+    measurementId: 'YOUR_META_PIXEL_ID'
+  },
+  [AnalyticsPlatforms.TIKTOK]: {
+    measurementId: 'YOUR_TIKTOK_PIXEL_ID'
+  }
+})
+```
+
+### Track Events
+
+```typescript
+import { getAnalyticsInstance, AnalyticsPlatforms } from '@jadecubes/analytics'
+
+// Get analytics instance for a specific platform
+const ga = getAnalyticsInstance(AnalyticsPlatforms.GA)
+const meta = getAnalyticsInstance(AnalyticsPlatforms.META)
+const tiktok = getAnalyticsInstance(AnalyticsPlatforms.TIKTOK)
+
+// Track events for Google Analytics 4
+ga?.processAnalyticsEvent({
+  eventName: 'add_to_cart',
+  eventParams: {
+    currency: 'USD',
+    value: 99.99,
+    items: [
+      {
+        item_id: 'SKU_12345',
+        item_name: 'Product Name',
+        price: 99.99
+      }
+    ]
+  }
+})
+
+// Track events for Meta (Facebook) Pixel
+meta?.processAnalyticsEvent({
+  eventName: 'AddToCart',
+  eventParams: {
+    content_name: 'Product Name',
+    content_ids: ['SKU_12345'],
+    content_type: 'product',
+    value: 99.99,
+    currency: 'USD'
+  }
+})
+
+// Track events for TikTok Pixel
+tiktok?.processAnalyticsEvent({
+  eventName: 'AddToCart',
+  eventParams: {
+    content_id: 'SKU_12345',
+    content_name: 'Product Name',
+    value: 99.99,
+    currency: 'USD'
+  }
+})
+```
+
+### Understanding Event Processing
+
+The `processAnalyticsEvent` method:
+- **Queues events** if the analytics script isn't loaded yet
+- **Automatically sends queued events** once the platform is ready
+- **Handles lazy loading** - you can call it immediately after initialization without worrying about script load timing
+
+### React Integration
+
+```typescript
+import { useEffect } from 'react'
+import { createAnalyticsProviders, getAnalyticsInstance, AnalyticsPlatforms } from '@jadecubes/analytics'
+
+function App() {
+  useEffect(() => {
+    // Initialize on app mount
+    createAnalyticsProviders({
+      [AnalyticsPlatforms.GA]: { measurementId: 'G-XXXXXXXXXX' },
+      [AnalyticsPlatforms.META]: { measurementId: 'YOUR_PIXEL_ID' },
+      [AnalyticsPlatforms.TIKTOK]: { measurementId: 'YOUR_TIKTOK_PIXEL_ID' }
+    })
+  }, [])
+
+  const handlePurchase = () => {
+    const ga = getAnalyticsInstance(AnalyticsPlatforms.GA)
+    const meta = getAnalyticsInstance(AnalyticsPlatforms.META)
+
+    // Track purchase event
+    ga?.processAnalyticsEvent({
+      eventName: 'purchase',
+      eventParams: {
+        transaction_id: 'T_12345',
+        value: 299.99,
+        currency: 'USD',
+        items: [{
+          item_id: 'SKU_12345',
+          item_name: 'Product Name',
+          price: 299.99
+        }]
+      }
+    })
+
+    meta?.processAnalyticsEvent({
+      eventName: 'Purchase',
+      eventParams: {
+        value: 299.99,
+        currency: 'USD'
+      }
+    })
+  }
+
+  return <YourApp />
+}
 ```
 
 ---
@@ -166,9 +290,3 @@ pnpm storybook
 # Build Storybook
 pnpm build-storybook
 ```
-
----
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file for details
