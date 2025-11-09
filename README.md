@@ -1,74 +1,39 @@
-# React Analytics
+# Analytics 🧮
 
-This project integrates uses of Tiktok pixel, Facebook pixel, Google Analytics for collecting user events on any websites with React based frontend.
+[![npm version](https://img.shields.io/npm/v/@jadecubes/analytics.svg)](https://www.npmjs.com/package/@jadecubes/analytics)  
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jadecubes/Analytics/ci.yml)](https://github.com/jadecubes/Analytics/actions)  
+[![License](https://img.shields.io/npm/l/@jadecubes/analytics.svg)](LICENSE)
 
-## Who Should Use This 
+> A unified TypeScript library for tracking analytics across **Google Analytics 4**, **Meta (Facebook) Pixel**, and **TikTok Pixel**, built for React applications and beyond.
 
-If you are looking forward to applying event collections of the mentioned platforms, you can use the module to integrate them all.
+---
 
-## How Do You Make Sure that the Code Can Work?
-You can execute command below to run unittests to see the test result.
+## 🎯 Why Analytics?
 
-```
-pnpm nx test analytics  
-```
+Modern front-ends often require multiple analytics platforms. Analytics offers:
+- A **single API** that works across GA4, Meta Pixel, and TikTok Pixel.
+- **Lazy loading** of tracking scripts and automatic queueing of events.
+- Built with **TypeScript**, offering type definitions out of the box.
+- Designed for **React** (hooks + context) but easy to adapt.
+- Built in an **Nx monorepo** for reuse across apps.
 
-## Why Should You Trust the Code
-The code confirms that all required data structions of <code>window</code> is initialized first, and events are sent to each platform after each of them is fully initialized. In other words, the events are only sent to each platform only after each of its <code>script</code>'s onload is called. If the onload is not called, the events are queued by the module and will be sent when the initialization is complete.
+---
 
-## Project Environment
-This project is managed by <code>Nx</code> and developed by Visual Studio. So, install [Nx Console](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console) in Visual Studio. The bundler is vite and the unittest runner is jest.
+## 🧑‍💻 Who Should Use It?
 
-## How to Build the Library
-Exeucte
-```
-pnpm nx build analytics 
-```
-Built files are in dist/libs/analytics.
+- Front-end engineers using React who want to track events across multiple analytics platforms.
+- Teams managing **monorepos** (e.g., Nx, Turborepo) and looking for a shared analytics lib.
+- Developers who want a lightweight, configurable alternative to multiple SDKs.
 
+---
 
-## How to Use the Module
-The recommended way is to first specify the user id in your application environment. You can take code in <code>apps/analyticsApp/main.tsx</code> and <code>apps/analyticsApp/.env.development</code>as an example.
+## 🚀 Getting Started
 
-After that, find the React component to whom you want to send events. The sample code shows below.
+### Install
 
-```typescript
+```bash
+# npm
+npm install @jadecubes/analytics
 
-import {
-  AnalyticsPlatforms,
-  createAnalyticsProviders,
-  getAnalyticsInstance,
-} from '@your-lib/analytics' // replace with actual package name
-
-// Example configuration
-const config = {
-  [AnalyticsPlatforms.GA]: {
-    measurementId: 'G-1234567890',
-  },
-  [AnalyticsPlatforms.META]: {
-    measurementId: '1234567890',
-  },
-  [AnalyticsPlatforms.TIKTOK]: {
-    measurementId: 'TT-1234567890',
-  },
-}
-
-// Initialize analytics providers
-createAnalyticsProviders(config)
-
-// Define a custom analytics event
-const event = {
-  eventName: 'purchase_complete',
-  eventParams: {
-    value: 100,
-    currency: 'USD',
-  },
-}
-
-// Send event to Google Analytics
-getAnalyticsInstance(AnalyticsPlatforms.GA)?.processAnalyticsEvent(event)
-```
-
-
-
-
+# or with pnpm / yarn
+pnpm add @jadecubes/analytics
