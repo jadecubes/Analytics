@@ -6,7 +6,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky",
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "cd libs/analytics && tsc --noEmit && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-pattern 'eslint.config.mjs'",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
