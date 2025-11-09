@@ -31,12 +31,10 @@
     "yaml.customTags": [ "!reference sequence" ],
     "files.exclude": {
       "node_modules": true,
-      ".nx": true,
       "dist": true
     },
     "files.watcherExclude": {
       "node_modules": true,
-      ".nx": true,
       "dist": true
     }
   }

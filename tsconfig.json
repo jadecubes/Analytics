@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "vitest.workspace.ts",
+    "eslint.config.mjs",
+    "apps/*/src/**/*",
+    "libs/*/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "**/node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
+}

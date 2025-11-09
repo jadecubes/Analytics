@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm list:*)",
+      "Bash(pnpm vitest run:*)",
+      "Bash(pnpm install:*)",
+      "Bash(cat:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(rm:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(pnpm build:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

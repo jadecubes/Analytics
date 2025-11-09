@@ -1,4 +1,3 @@
-import nxEslintPlugin from '@nx/eslint-plugin'
 import stylexPlugin from '@stylexjs/eslint-plugin'
 import stylistic from '@stylistic/eslint-plugin'
 import pluginTypeScript from '@typescript-eslint/eslint-plugin'
@@ -16,7 +15,6 @@ export default defineConfig([
       '**/node_modules/**',
       '**/dist/**',
       '**/build/**',
-      '**/.nx/**',
       '**/.next/**',
       '**/coverage/**',
       '**/vite.config.*.timestamp*',
@@ -27,7 +25,6 @@ export default defineConfig([
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.mjs'],
     plugins: {
-      '@nx': nxEslintPlugin,
       '@stylistic': stylistic,
       '@typescript-eslint': pluginTypeScript,
       'import': importPlugin,
@@ -61,14 +58,6 @@ export default defineConfig([
       ...pluginReact.configs['jsx-runtime'].rules,
       ...pluginReactHooks.configs.recommended.rules,
       ...stylistic.configs['recommended-flat'].rules,
-      '@nx/enforce-module-boundaries': [
-        'error',
-        {
-          enforceBuildableLibDependency: true,
-          allow: [],
-          depConstraints: [{ sourceTag: '*', onlyDependOnLibsWithTags: ['*'] }],
-        },
-      ],
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/indent': ['error', 2],
