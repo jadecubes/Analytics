@@ -1,12 +1,46 @@
 {
-  "name": "analytics",
+  "name": "@jadecubes/analytics",
   "version": "0.0.1",
+  "description": "A unified TypeScript library for tracking analytics across Google Analytics 4, Meta (Facebook) Pixel, and TikTok Pixel",
   "main": "./index.js",
+  "module": "./index.mjs",
   "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./index.mjs",
-      "require": "./index.js"
+      "require": "./index.js",
+      "types": "./index.d.ts"
     }
+  },
+  "files": [
+    "index.js",
+    "index.mjs",
+    "index.d.ts",
+    "**/*.d.ts"
+  ],
+  "keywords": [
+    "analytics",
+    "google-analytics",
+    "ga4",
+    "facebook-pixel",
+    "meta-pixel",
+    "tiktok-pixel",
+    "tracking",
+    "react",
+    "typescript"
+  ],
+  "author": "jadecubes",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jadecubes/Analytics.git",
+    "directory": "libs/analytics"
+  },
+  "bugs": {
+    "url": "https://github.com/jadecubes/Analytics/issues"
+  },
+  "homepage": "https://github.com/jadecubes/Analytics#readme",
+  "peerDependencies": {
+    "react": "^18.0.0"
   }
 }
