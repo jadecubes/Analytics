@@ -1,7 +1,10 @@
 {
   // This file is not used in compilation. It is here just for a nice editor experience.
-  "extends": "@docusaurus/tsconfig",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "."
-  }
+    "baseUrl": ".",
+    "allowJs": true,
+    "jsx": "react"
+  },
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx"]
 }

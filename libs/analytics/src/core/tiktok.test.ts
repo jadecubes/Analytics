@@ -37,7 +37,7 @@ describe('TikTok Analytics', () => {
       // Arrange: Clean state ensured by beforeEach
 
       // Act: Create TikTok instance
-      const tiktok = TikTok.getInstance(config)
+      TikTok.getInstance(config)
 
       // Assert: Script should be injected with correct data-id
       const script = document.querySelector(`script[data-id="tiktok-pixel-${measurementId}"]`)
@@ -207,7 +207,8 @@ describe('TikTok Analytics', () => {
         page: vi.fn(),
         load: vi.fn(),
       }
-      window.ttq = mockTtq as any
+      // @ts-expect-error: Intentionally testing incomplete ttq object
+      window.ttq = mockTtq
       tiktok['setIsReady'](true)
 
       const event: BaseAnalyticsEvent = {

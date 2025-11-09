@@ -37,12 +37,12 @@ describe('Meta Analytics', () => {
       // Arrange: Clean state ensured by beforeEach
 
       // Act: Create Meta instance
-      const meta = Meta.getInstance(config)
+      Meta.getInstance(config)
 
       // Assert: Script should be injected in DOM
       const scripts = document.querySelectorAll('script')
       const fbqScript = Array.from(scripts).find(s =>
-        s.textContent?.includes('connect.facebook.net/en_US/fbevents.js')
+        s.textContent?.includes('connect.facebook.net/en_US/fbevents.js'),
       )
       expect(fbqScript).not.toBeNull()
       expect(fbqScript?.textContent).toContain(measurementId)
@@ -55,7 +55,7 @@ describe('Meta Analytics', () => {
       // Act: Find and trigger script onload
       const scripts = document.querySelectorAll('script')
       const fbqScript = Array.from(scripts).find(s =>
-        s.textContent?.includes('connect.facebook.net/en_US/fbevents.js')
+        s.textContent?.includes('connect.facebook.net/en_US/fbevents.js'),
       )
       fbqScript?.onload?.(new Event('load'))
 

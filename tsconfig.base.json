@@ -15,6 +15,7 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
+    "allowJs": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {

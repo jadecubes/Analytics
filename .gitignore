@@ -35,14 +35,11 @@ yarn-error.log
 testem.log
 /typings
 # fix vite.config.timestamp files not being cleaned
-# https://github.com/nrwl/nx/issues/22086
 vite.config.*.timestamp-*
 
 # System Files
 .DS_Store
 Thumbs.db
-
-.nx
 
 storybook-static
 
