@@ -268,7 +268,6 @@ Analytics/
 │       │   ├── react/      # React-specific providers
 │       │   └── types/      # TypeScript types
 │       └── vite.config.ts  # Vite build configuration
-├── docs/                   # Documentation (Storybook)
 └── tools/                  # Build and development tools
 ```
 
@@ -281,12 +280,12 @@ pnpm build
 # Run tests
 pnpm test
 
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:coverage
+
 # Lint code
 pnpm lint
-
-# Run Storybook for documentation
-pnpm storybook
-
-# Build Storybook
-pnpm build-storybook
 ```

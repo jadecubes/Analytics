@@ -41,8 +41,6 @@ vite.config.*.timestamp-*
 .DS_Store
 Thumbs.db
 
-storybook-static
-
 # Next.js
 .next
 out
