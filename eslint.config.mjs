@@ -19,7 +19,6 @@ export default defineConfig([
       '**/coverage/**',
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
-      '**/storybook-static/**',
     ],
   },
   {
